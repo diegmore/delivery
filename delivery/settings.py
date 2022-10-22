@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'orders.apps.OrdersConfig',
+    'delivery_man.apps.DeliveryManConfig',
 ]
 
 MIDDLEWARE = [
