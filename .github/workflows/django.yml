@@ -26,3 +26,11 @@ jobs:
         DJANGO_ALLOWED_HOSTS: localhost
     - name: Run tests
       run: python manage.py test
+      env:
+        DEBUG: "0"
+        DJANGO_ALLOWED_HOSTS: localhost
+        DB_ENGINE: django.db.backends.postgresql
+        DB_HOST: localhost
+        DB_DATABASE: delivery
+        DB_USER: postgres
+        DB_PASSWORD: postgres
