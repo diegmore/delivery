@@ -14,8 +14,12 @@ class Command(BaseCommand):
             raise CommandError('Error trying to request the delivery man positions')
         deliveryman_data = deliveryman_positions_request.json().get('alfreds', [])
         with transaction.atomic():
+            delivery_men_update_list = []
             for deliveryman in deliveryman_data:
-                deliveryman_object = DeliveryMan.objects.get_or_create(id=deliveryman.get('id'))
-                print(deliveryman_object)
-                print(asdas)
+                deliveryman_object, _ = DeliveryMan.objects.get_or_create(id=deliveryman.get('id'))
+                deliveryman_object.lat = deliveryman.get('lat')
+                deliveryman_object.long = deliveryman.get('lng')
+                deliveryman_object.last_update = deliveryman.get('lastUpdate')
+                delivery_men_update_list.append(deliveryman_object)
+            DeliveryMan.objects.bulk_update(delivery_men_update_list, ['lat', 'long', 'last_update'])
             
